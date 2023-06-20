@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
+import axios from 'axios'
 import {
     StyleSheet,
     Text,
@@ -8,13 +9,25 @@ import {
     TextInput,
     TouchableOpacity,
 } from "react-native";
+import {BASE_URL} from '@env'
 export default function LoginForm({ navigation }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const loginAgent = async () => {
+        try {
+            const body = { username, password, userType: 'agent' }
+            const config = { headers: { 'Content-Type': 'application/json' } }
+            const result = await axios.post(`${BASE_URL}/api/login`, body, config)
+            if (result.data.error)
+                alert("Invalid Credentials")
+            else
+                navigation.navigate('Dashboard')
+        }
+        catch (error) {
+            alert("Failed to Login")
+            alert(error.message)
+        }
 
-    const loginAgent = () => {
-        console.log({ username, password })
-        navigation.navigate('Dashboard')
     }
 
     return (
