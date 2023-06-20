@@ -8,12 +8,13 @@ import {
     TextInput,
     TouchableOpacity,
 } from "react-native";
-export default function App() {
+export default function LoginForm({ navigation }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const loginAgent = () => {
         console.log({ username, password })
+        navigation.navigate('Dashboard')
     }
 
     return (

@@ -143,12 +143,11 @@ const styles = StyleSheet.create({
     },
     dialedNumbers: {
         width: '100%',
-        height: 80,
+        height: 70,
         marginBottom: 20,
         paddingHorizontal: 10,
         borderRadius: 8,
         fontSize: 40,
-        fontWeight: 'bold',
         color: 'black',
     },
     removeButton: {
