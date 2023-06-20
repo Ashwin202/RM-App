@@ -26,9 +26,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Custom Dial" options={{tabBarIcon: ({ color, size }) => (<Icon name="phone" size={22} color="black" />)}} component={CustomDial} />
-        <Tab.Screen name="Inbox" options={{tabBarIcon: ({ color, size }) => (<Icon name="inbox" size={22} color="black" />)}} component={SettingsScreen} />
-        <Tab.Screen name="Contacts" options={{tabBarIcon: ({ color, size }) => (<Icon name="address-book" size={22} color="black" />)}} component={LogSettings} />
+        <Tab.Screen name="Custom Dial" options={{ tabBarIcon: ({ color, size }) => (<Icon name="phone" size={22} color="black" />) }} component={CustomDial} />
+        <Tab.Screen name="Inbox" options={{ tabBarIcon: ({ color, size }) => (<Icon name="inbox" size={22} color="black" />) }} component={SettingsScreen} />
+        <Tab.Screen name="Contacts" options={{ tabBarIcon: ({ color, size }) => (<Icon name="address-book" size={22} color="black" />) }} component={LogSettings} />
       </Tab.Navigator>
     </NavigationContainer>
   );
