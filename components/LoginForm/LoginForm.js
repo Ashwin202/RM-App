@@ -18,7 +18,7 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={require('./ryng8_red.png')} />
+            <Image style={styles.image} source={require('../../assets/ryng8_red.png')} />
             <StatusBar style="auto" />
 
             <View style={styles.inputView}>

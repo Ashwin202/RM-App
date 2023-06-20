@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CustomDial from './components/CustomDial/CustomDial'
+import LoginForm from './components/LoginForm/LoginForm'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 function SettingsScreen() {
@@ -28,7 +29,7 @@ export default function App() {
       <Tab.Navigator>
         <Tab.Screen name="Custom Dial" options={{ tabBarIcon: ({ color, size }) => (<Icon name="phone" size={22} color="black" />) }} component={CustomDial} />
         <Tab.Screen name="Inbox" options={{ tabBarIcon: ({ color, size }) => (<Icon name="inbox" size={22} color="black" />) }} component={SettingsScreen} />
-        <Tab.Screen name="Contacts" options={{ tabBarIcon: ({ color, size }) => (<Icon name="address-book" size={22} color="black" />) }} component={LogSettings} />
+        <Tab.Screen name="Contacts" options={{ tabBarIcon: ({ color, size }) => (<Icon name="address-book" size={22} color="black" />) }} component={LoginForm} />
       </Tab.Navigator>
     </NavigationContainer>
   );
