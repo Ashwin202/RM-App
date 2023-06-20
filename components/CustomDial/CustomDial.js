@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet , TouchableOpacity, Text, TextInput } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Text, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import axios from 'react-native-axios'
 
 const App = () => {
-  const [dialedNumbers, setDialedNumbers] = useState(''); 
+  const [dialedNumbers, setDialedNumbers] = useState('');
 
   const handlePress = (number) => {
-        setDialedNumbers((prevDialedNumbers) => prevDialedNumbers + number);
-    };
+    setDialedNumbers((prevDialedNumbers) => prevDialedNumbers + number);
+  };
 
-    const handleLongPress = () => {
+  const handleLongPress = () => {
     setDialedNumbers((prevDialedNumbers) => prevDialedNumbers + '+');
   };
 
@@ -22,19 +22,28 @@ const App = () => {
     setDialedNumbers((prevDialedNumbers) => prevDialedNumbers.slice(0, -1));
   };
 
-  const handleCall = async() => {
+  const handleCall = async () => {
     if (false) {
       alert('Please insert correct contact number');
       return;
     }
-    else{
-      alert(dialedNumbers)
-      try{
-          const result = await axios.post(`http://idfc.ryng.local/api/test-call-make`,{number:'+917994771185'})
+    else {
+      const body = {
+        number: dialedNumbers
+      }
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+
+      try {
+        const result = await axios.post(`http://idfc.ryng.local/api/test-call-make`, body, config)
 
       }
-      catch(error){
-        console.log(error)
+      catch (error) {
+        // console.log(error)
+        alert(error.message)
       }
     }
   };
@@ -44,64 +53,64 @@ const App = () => {
       <View style={styles.container}>
         <TextInput style={styles.dialedNumbers} value={dialedNumbers} editable={false} />
         <View style={styles.row}>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('1')}>
-                <Text style={styles.buttonText}>1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('2')}>
-                <Text style={styles.buttonText}>2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('3')}>
-                <Text style={styles.buttonText}>3</Text>
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('1')}>
+            <Text style={styles.buttonText}>1</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('2')}>
+            <Text style={styles.buttonText}>2</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('3')}>
+            <Text style={styles.buttonText}>3</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.row}>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('4')}>
-                <Text style={styles.buttonText}>4</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('5')}>
-                <Text style={styles.buttonText}>5</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('6')}>
-                <Text style={styles.buttonText}>6</Text>
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('4')}>
+            <Text style={styles.buttonText}>4</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('5')}>
+            <Text style={styles.buttonText}>5</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('6')}>
+            <Text style={styles.buttonText}>6</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.row}>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('7')}>
-                <Text style={styles.buttonText}>7</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('8')}>
-                <Text style={styles.buttonText}>8</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('9')}>
-                <Text style={styles.buttonText}>9</Text>
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('7')}>
+            <Text style={styles.buttonText}>7</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('8')}>
+            <Text style={styles.buttonText}>8</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('9')}>
+            <Text style={styles.buttonText}>9</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.row}>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('*')}>
-                <Text style={styles.buttonText}>*</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => handlePress('0')}
-              onLongPress={() => handleLongPress()}
-              delayLongPress={500}
-            >
-              <Text style={styles.buttonText}>0</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => handlePress('#')}>
-                <Icon name="hashtag" size={14} color="black" /> 
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('*')}>
+            <Text style={styles.buttonText}>*</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => handlePress('0')}
+            onLongPress={() => handleLongPress()}
+            delayLongPress={500}
+          >
+            <Text style={styles.buttonText}>0</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress('#')}>
+            <Icon name="hashtag" size={14} color="black" />
+          </TouchableOpacity>
         </View>
         <View style={styles.row}>
-            
-            <TouchableOpacity style={styles.callButton} onPress={() => handleCall()}>
-              <Icon name="phone" size={24} color="#ffffff" />
+
+          <TouchableOpacity style={styles.callButton} onPress={() => handleCall()}>
+            <Icon name="phone" size={24} color="#ffffff" />
+          </TouchableOpacity>
+          {dialedNumbers.length > 0 && (
+            <TouchableOpacity style={styles.removeButton} onPress={() => handleRemove()} onLongPress={handleClearPress} >
+              <Icon name="arrow-left" size={18} color="black" />
             </TouchableOpacity>
-            {dialedNumbers.length > 0 && (
-              <TouchableOpacity style={styles.removeButton} onPress={() => handleRemove()} onLongPress={handleClearPress} >
-                <Icon name="arrow-left" size={18} color="black" />
-              </TouchableOpacity>
-            )}
+          )}
         </View>
       </View>
     </SafeAreaView>
@@ -116,23 +125,23 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   row: {
-        flexDirection: 'row',
-        marginTop: 10,
-    },
-    button: {
-        width: 70,
-        height: 70,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 15,
-        marginRight: 15,
-        borderRadius: 40,
-    },
-    buttonText: {
-        fontSize: 24,
-        color: 'black',
-    },
-    dialedNumbers: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  button: {
+    width: 70,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 15,
+    marginRight: 15,
+    borderRadius: 40,
+  },
+  buttonText: {
+    fontSize: 24,
+    color: 'black',
+  },
+  dialedNumbers: {
     width: '100%',
     height: 80,
     marginBottom: 20,
