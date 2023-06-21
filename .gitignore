@@ -15,7 +15,9 @@ client/.DS_Store
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
+
+
 client/.env*
 server/.env
-
 server/package-lock.json
+server/db/clusters.json
