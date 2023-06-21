@@ -5,6 +5,7 @@ import CustomDial from "../CustomDial/CustomDial";
 import LoginPage from "../LoginForm/LoginForm";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
+import CallWindow from "../callWindow/callWindow";
 
 function LogScreen() {
 	return (
@@ -92,7 +93,7 @@ return (
 					),
 					tabBarLabelStyle: { fontSize: 12, padding: 0, margin: 0 },
 				}}
-				component={LogScreen}
+				component={CallWindow}
 			/>
 			<Tab.Screen
 				name="Keypad"
