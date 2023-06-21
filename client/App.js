@@ -30,7 +30,7 @@ const App = () => {
             headerShown: true,
             headerLeft: () => (
               <Image
-                source={require("./assets/logo.png")}
+                source={require("./assets/img/logo.png")}
                 style={{ height: 20, width: 20, marginLeft: 10 }}
               />
             ),
