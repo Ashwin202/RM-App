@@ -3,7 +3,7 @@ const controller = require('./controller')
 
 module.exports = {
     configure: () => {
-        router.post('/login', controller.login)
+        router.post('/make', controller.makeCall)
         return router;
     },
 };

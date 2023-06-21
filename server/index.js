@@ -7,12 +7,15 @@ const { readdirSync } = require('fs');
 const Log = require('./log')
 const ip = require('ip')
 const tenantMiddleware = require('./middleware/subDomainManager')
+const requestLogger = require('./middleware/requestLogger')
 
 require('dotenv').config()
 
 app.use(express.json())
 app.use(cors())
 app.use(helmet())
+
+app.use(requestLogger)
 
 app.use(tenantMiddleware)
 
