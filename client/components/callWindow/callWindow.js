@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import {
     Button,
     Divider,
@@ -42,7 +42,7 @@ const CallWindow = () => {
 
     return (
         <Provider>
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
                 {/* Top button bar */}
                 <View style={styles.topContainer}>
                     <Text style={{ fontSize: 28, color: '#393E41' }}>Arun Raj</Text>
@@ -112,7 +112,7 @@ const CallWindow = () => {
                                 </View>
                                 <View style={styles.tabContainer}>
                                     <View style={{ ...styles.card, height: '90%' }}>
-                                        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                                        <ScrollView contentContainerStyle={{ flexGrow: 1, maxHeight: 100 }}>
                                             <View style={styles.custVaues}>
                                                 <Text style={styles.title}>Custom Field 1</Text>
                                                 <Text style={styles.content}>Meta data 1</Text>
@@ -209,7 +209,7 @@ const CallWindow = () => {
                     </View>
                 </View>
 
-            </SafeAreaView>
+            </View>
         </Provider>
     );
 };

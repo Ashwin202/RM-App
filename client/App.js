@@ -13,24 +13,24 @@ const App = () => {
 	return (
 		<NavigationContainer independent={true}>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen 
+				<Stack.Screen
 					name="Login"
 					component={LoginForm}
-					
+
 				/>
 				<Stack.Screen
 					name="Dashboard"
 					component={Dashboard}
 					options={({ navigation, route }) => ({
-            headerShown: true,
+						headerShown: true,
 						headerLeft: () => (
 							<Image
 								source={require("./assets/logo.png")}
-								style={{ height:20, width:20,marginLeft: 10}}
+								style={{ height: 20, width: 20, marginLeft: 10 }}
 							/>
 						),
 						headerTitle: (props) => (
-							<Text variant="h6" style={{ marginLeft: 2}}>
+							<Text variant="h6" style={{ marginLeft: 2 }}>
 								Dashboard
 							</Text>
 						),
