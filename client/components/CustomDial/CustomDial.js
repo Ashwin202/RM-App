@@ -38,7 +38,7 @@ const App = () => {
             }
 
             try {
-                const result = await axios.post(`http://idfc.ryng.local/api/test-call-make`, body, config)
+                const result = await axios.post(`http://idfc.ryng.local/api/call/custom`, body, config)
 
             }
             catch (error) {

@@ -17,6 +17,7 @@ export default function LoginForm({ navigation }) {
         try {
             const body = { username, password, userType: 'agent' }
             const config = { headers: { 'Content-Type': 'application/json' } }
+            console.log({BASE_URL})
             const result = await axios.post(`${BASE_URL}/api/login`, body, config)
             if (result.data.error)
                 alert("Invalid Credentials")
