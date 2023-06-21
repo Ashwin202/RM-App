@@ -80,11 +80,7 @@ const makeCall = async (request, response) => {
         }
 
     } catch (error) {
-        if (error.message) {
-            response.status(200).json(error)
-        } else {
-            response.status(error.statusCode).json(error.body)
-        }
+        sendHTTPResponse.error(response, error.message)
     }
 }
 module.exports = {
