@@ -4,6 +4,10 @@ const cors = require('cors')
 const helmet = require('helmet')
 const colors = require('colors')
 const { readdirSync } = require('fs');
+const Log = require('./log')
+const ip = require('ip')
+
+require('dotenv').config()
 
 app.use(express.json())
 app.use(cors())
@@ -32,6 +36,6 @@ app.use((error, request, response, next) => {
 
 const PORT = process.env.PORT || 5001
 app.listen(PORT, () => {
-    // Log.info(`Running App on http://${ip.address()}:${process.env.PORT}`)
-    console.log(`Server starting on port ${PORT}`.blue)
+    Log.info(`Running App on http://${ip.address()}:${process.env.PORT}`)
+    // console.log(`Server starting on port ${PORT}`.blue)
 })
