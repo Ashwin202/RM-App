@@ -15,7 +15,6 @@ export default function LoginForm({ navigation }) {
     const [password, setPassword] = useState("123456");
     const loginAgent = async () => {
         try {
-            return navigation.navigate('Dashboard')
             const body = { username, password, userType: 'agent' }
             const config = { headers: { 'Content-Type': 'application/json' } }
             console.log({BASE_URL})
