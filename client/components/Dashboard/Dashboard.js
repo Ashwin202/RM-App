@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Text, View } from "react-native";
+import React, { useState } from "react";
+import { Text, View, Switch, StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import CustomDial from "../CustomDial/CustomDial";
 import LoginPage from "../LoginForm/LoginForm";
@@ -22,10 +22,19 @@ function ContactScreen() {
 	);
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
 const Tab = createMaterialTopTabNavigator();
 
 export default function Dashboard() {
-	return (
+	
+return (
 		<Tab.Navigator
 			tabBarPosition="bottom"
 			independent={true}
