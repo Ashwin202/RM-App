@@ -17,3 +17,5 @@ client/.DS_Store
 .metro-health-check*
 client/.env*
 server/.env
+
+server/package-lock.json
