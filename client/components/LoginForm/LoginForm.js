@@ -11,10 +11,11 @@ import {
 } from "react-native";
 import {BASE_URL} from '@env'
 export default function LoginForm({ navigation }) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("nithin@askerbot.com");
+    const [password, setPassword] = useState("123456");
     const loginAgent = async () => {
         try {
+            return navigation.navigate('Dashboard')
             const body = { username, password, userType: 'agent' }
             const config = { headers: { 'Content-Type': 'application/json' } }
             console.log({BASE_URL})
@@ -49,6 +50,7 @@ export default function LoginForm({ navigation }) {
                     style={styles.TextInput}
                     placeholder="Username"
                     placeholderTextColor="#003f5c"
+                    value ={username}
                     onChangeText={(email) => setUsername(email)}
                 />
             </View>
@@ -58,6 +60,7 @@ export default function LoginForm({ navigation }) {
                     placeholder="Password"
                     placeholderTextColor="#003f5c"
                     secureTextEntry={true}
+                    value ={password}
                     onChangeText={(password) => setPassword(password)}
                 />
             </View>
