@@ -68,8 +68,8 @@ const makeCall = async (request, response) => {
                     if (lastLogStatus === 'Disconnected' || lastLogStatus === 'Logged Out') {
                         await runQuery(domain, QueryBuilder.setAgentStatusInEventLog(domain), [agentBreakID, 'Connected', request.user_id])
                     }
-                    await runQuery(domain, QueryBUILDER.SETAGENTSTATUSINEVENTLOG(DOMAIN), [AGENTBREAKID, 'RESUME', REQUEST.USER_ID])
-                    SENDHTTPRESPONSE.SUCCESS(RESponse, 'Call Details Fetched', resultCallDetails)
+                    await runQuery(domain, QueryBuilder.setAgentStatusInEventLog(domain), [agentBreakID, 'resume', request.user_id])
+                    sendHTTPResponse.success(response, 'Call Details Fetched', resultCallDetails)
                 } else {
                     sendHTTPResponse.error(response, 'Call Details Fetched', resultCallDetails)
                 }
