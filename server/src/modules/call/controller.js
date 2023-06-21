@@ -68,8 +68,8 @@ const makeCall = async (request, response) => {
                     if (lastLogStatus === 'Disconnected' || lastLogStatus === 'Logged Out') {
                         await runQuery(domain, QueryBuilder.setAgentStatusInEventLog(domain), [agentBreakID, 'Connected', request.user_id])
                     }
-                    await runQuery(domain, QueryBuilder.setAgentStatusInEventLog(domain), [agentBreakID, 'resume', request.user_id])
-                    sendHTTPResponse.success(response, 'Call Details Fetched', resultCallDetails)
+                    await runQuery(domain, QueryBUILDER.SETAGENTSTATUSINEVENTLOG(DOMAIN), [AGENTBREAKID, 'RESUME', REQUEST.USER_ID])
+                    SENDHTTPRESPONSE.SUCCESS(RESponse, 'Call Details Fetched', resultCallDetails)
                 } else {
                     sendHTTPResponse.error(response, 'Call Details Fetched', resultCallDetails)
                 }
@@ -80,11 +80,7 @@ const makeCall = async (request, response) => {
         }
 
     } catch (error) {
-        if (error.message) {
-            response.status(200).json(error)
-        } else {
-            response.status(error.statusCode).json(error.body)
-        }
+        sendHTTPResponse.error(response, error.message)
     }
 }
 module.exports = {
