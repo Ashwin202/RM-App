@@ -21,3 +21,5 @@ client/.env*
 server/.env
 server/package-lock.json
 server/db/clusters.json
+node_modules
+package-lock.json
