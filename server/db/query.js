@@ -1,5 +1,3 @@
-
-
 module.exports = {
     getAgent(domain) {
         return `SELECT * FROM ryng_${domain}.agent WHERE id = ?`
@@ -17,4 +15,9 @@ module.exports = {
                 FROM ryng_default.organisation
                 WHERE domain_name = '${domain}';`
     },
+    loginAgent(domain) {
+        return `SELECT password, id, firstname, lastname, username,active,num, salt, hash
+                FROM ryng_${domain}.agent
+                WHERE username = ?`
+    }
 }

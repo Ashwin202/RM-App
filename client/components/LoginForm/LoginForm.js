@@ -11,12 +11,10 @@ import {
 } from "react-native";
 import {BASE_URL} from '@env'
 export default function LoginForm({ navigation }) {
-    const [username, setUsername] = useState("nithin@askerbot.com");
+    const [username, setUsername] = useState("melchizedek");
     const [password, setPassword] = useState("123456");
     const loginAgent = async () => {
         try {
-
-            return navigation.navigate('Dashboard')            
             const body = { username, password, userType: 'agent' }
             const config = { headers: { 'Content-Type': 'application/json' } }
             console.log({BASE_URL})
