@@ -9,17 +9,16 @@ import {
     TextInput,
     TouchableOpacity,
 } from "react-native";
-import {BASE_URL} from '@env'
+import { BASE_URL } from '@env'
 export default function LoginForm({ navigation }) {
     const [username, setUsername] = useState("nithin@askerbot.com");
     const [password, setPassword] = useState("123456");
     const loginAgent = async () => {
         try {
 
-            return navigation.navigate('Dashboard')            
+            return navigation.navigate('Dashboard')
             const body = { username, password, userType: 'agent' }
             const config = { headers: { 'Content-Type': 'application/json' } }
-            console.log({BASE_URL})
             const result = await axios.post(`${BASE_URL}/api/login`, body, config)
             if (result.data.error)
                 alert("Invalid Credentials")
@@ -44,17 +43,16 @@ export default function LoginForm({ navigation }) {
                     style={styles.TextInput}
                     placeholder="Username"
                     placeholderTextColor="#003f5c"
-                    value ={username}
+                    value={username}
                     onChangeText={(email) => setUsername(email)}
                 />
-            </View>
-            <View style={styles.inputView}>
+
                 <TextInput
                     style={styles.TextInput}
                     placeholder="Password"
                     placeholderTextColor="#003f5c"
                     secureTextEntry={true}
-                    value ={password}
+                    value={password}
                     onChangeText={(password) => setPassword(password)}
                 />
             </View>
@@ -77,26 +75,30 @@ const styles = StyleSheet.create({
         height: 45,
     },
     inputView: {
-        backgroundColor: "#f5f5f5",
         borderRadius: 5,
-        width: "70%",
-        height: 45,
-        marginBottom: 20
+        width: "80%",
     },
     TextInput: {
+        width: '100%',
         height: 50,
         flex: 1,
-        padding: 10,
-        marginLeft: 20,
+        padding: 12,
+        backgroundColor: "#f5f5f5",
+        marginBottom: 20,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+        outlineStyle: 'none',
     },
     loginBtn: {
         width: "80%",
-        borderRadius: 25,
+        borderRadius: 5,
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 40,
-        backgroundColor: "#F22F46"
+        backgroundColor: "#F22F46",
     },
     loginText: {
         color: "#fff",
