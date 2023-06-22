@@ -10,8 +10,7 @@ module.exports = {
     console.log("first=======")
     const domain = request.tenant;
     try {
-      const campaignList = await runQuery(QueryBuilder.getCampaignList(domain));
-      console.log({campaignList})
+      const campaignList = await runQuery(domain, QueryBuilder.getCampaignList(domain))
       sendHTTPResponse.success(
         response,
         "Successfully Fetched all campaign list",
