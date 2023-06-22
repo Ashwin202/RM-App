@@ -14,7 +14,7 @@ export default function LoginForm({ navigation }) {
     const [username, setUsername] = useState("melchizedek");
     const [password, setPassword] = useState("123456");
     const loginAgent = async () => {
-        try {          
+        try {
             const body = { username, password, userType: 'agent' }
             const config = { headers: { 'Content-Type': 'application/json' } }
             console.log({BASE_URL})
@@ -33,22 +33,16 @@ export default function LoginForm({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={require('../../assets/ryng8_red.png')} />
+            <Image style={styles.image} source={require('../../assets/img/ryng8_red.png')} />
             <StatusBar style="auto" />
 
-            <View style={styles.inputView}>
-                <TextInput
-                    style={styles.TextInput}
-                    placeholder="Agent"
-                    placeholderTextColor="#999999"
-                    editable={false}
-                />
-            </View>
+
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}
                     placeholder="Username"
                     placeholderTextColor="#003f5c"
+                    value ={username}
                     onChangeText={(email) => setUsername(email)}
                 />
             </View>
@@ -58,11 +52,12 @@ export default function LoginForm({ navigation }) {
                     placeholder="Password"
                     placeholderTextColor="#003f5c"
                     secureTextEntry={true}
+                    value ={password}
                     onChangeText={(password) => setPassword(password)}
                 />
             </View>
             <TouchableOpacity onPress={() => loginAgent()} style={styles.loginBtn}>
-                <Text style={styles.loginText}>LOGIN</Text>
+                <Text style={styles.loginText}> AGENT LOGIN</Text>
             </TouchableOpacity>
         </View>
     );
@@ -77,7 +72,7 @@ const styles = StyleSheet.create({
     image: {
         marginBottom: 40,
         width: "44%",
-        height: 38,
+        height: 45,
     },
     inputView: {
         backgroundColor: "#f5f5f5",

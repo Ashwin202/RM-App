@@ -1,26 +1,120 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CustomDial from '../CustomDial/CustomDial'
-import LoginPage from '../LoginForm/LoginForm'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useState } from "react";
+import { Text, View, Switch, StyleSheet } from "react-native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import CustomDial from "../CustomDial/CustomDial";
+import LoginPage from "../LoginForm/LoginForm";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Entypo from "react-native-vector-icons/Entypo";
+import CallWindow from "../callWindow/callWindow";
 
-function SettingsScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings!</Text>
-        </View>
-    );
+function LogScreen() {
+	return (
+		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+			<Text>Log content</Text>
+		</View>
+	);
 }
 
-const Tab = createBottomTabNavigator();
+function ContactScreen() {
+	return (
+		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+			<Text>Contact content</Text>
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
+const Tab = createMaterialTopTabNavigator();
 
 export default function Dashboard() {
-    return (
-        <Tab.Navigator>
-            <Tab.Screen name="Custom Dial" options={{ tabBarIcon: ({ color, size }) => (<Icon name="phone" size={22} color="black" />) }} component={CustomDial} />
-            <Tab.Screen name="Inbox" options={{ tabBarIcon: ({ color, size }) => (<Icon name="inbox" size={22} color="black" />) }} component={SettingsScreen} />
-            <Tab.Screen name="Contacts" options={{ tabBarIcon: ({ color, size }) => (<Icon name="address-book" size={22} color="black" />) }} component={LoginPage} />
-        </Tab.Navigator>
-    );
+	
+return (
+		<Tab.Navigator
+			tabBarPosition="bottom"
+			independent={true}
+			tabBarOptions={{
+				style: {
+					height: 50,
+					backgroundColor: "white",
+					paddingBottom: 0,
+					paddingHorizontal: 5,
+				},
+				indicatorStyle: {
+					backgroundColor: "red",
+				},
+				tabStyle: {
+					padding: 0,
+					margin: 0,
+				},
+			}}
+		>
+			<Tab.Screen
+				name="Contacts"
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<View
+							style={{
+								flex: 1,
+								justifyContent: "center",
+								alignItems: "center",
+								padding: 0,
+								margin: 0,
+							}}
+						>
+							<FontAwesome name="address-book" size={16} color="black" />
+						</View>
+					),
+					tabBarLabelStyle: { fontSize: 12, padding: 0, margin: 0 },
+				}}
+				component={ContactScreen}
+			/>
+			<Tab.Screen
+				name="log"
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<View
+							style={{
+								flex: 1,
+								justifyContent: "center",
+								alignItems: "center",
+								padding: 0,
+								margin: 0,
+							}}
+						>
+							<FontAwesome name="inbox" size={16} color="black" />
+						</View>
+					),
+					tabBarLabelStyle: { fontSize: 12, padding: 0, margin: 0 },
+				}}
+				component={CallWindow}
+			/>
+			<Tab.Screen
+				name="Keypad"
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<View
+							style={{
+								flex: 1,
+								justifyContent: "center",
+								alignItems: "center",
+								padding: 0,
+								margin: 0,
+							}}
+						>
+							<Entypo name="dial-pad" size={16} color="black" />
+						</View>
+					),
+					tabBarLabelStyle: { fontSize: 12, padding: 0, margin: 0 },
+				}}
+				component={CustomDial}
+			/>
+		</Tab.Navigator>
+	);
 }

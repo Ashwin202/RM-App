@@ -16,7 +16,6 @@ module.exports = {
             Log.info('Verified route | /protected')
             reponse.status(200).json({ error: false, message: "You are successfully authenticated to this route!", data: {}});
         });
-
         return router;
     },
 };
