@@ -4,7 +4,7 @@ const authGuard = require('../../../middleware/authGuard')
 
 module.exports = {
     configure: () => {
-        router.post('/list', controller.getCampaigns)
+        router.get('/list', controller.getCampaigns)
 
         return router;
     },

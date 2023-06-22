@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,9 +8,11 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
+import axios from "axios";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { IconButton } from "@react-native-material/core";
 import { Button, Provider } from "react-native-paper";
+import { BASE_URL } from '@env'
 const tabsData = [
   { id: 1, title: "My Contact Books" },
   { id: 2, title: "Campaign by Org" },
@@ -124,7 +126,11 @@ const ContactBook = () => {
 const Contacts = () => {
   const [index, setIndex] = useState(0);
   const [activeTab, setActiveTab] = useState(tabsData[0]);
-
+  useEffect(async () => {
+    alert("hello")
+    const campaignList = await axios.get(`${BASE_URL}/api/campaign/list`);
+    alert(campaignList[0])
+  }, [0]);
   const handleTabPress = (tab) => {
     setActiveTab(tab);
   };
@@ -134,9 +140,17 @@ const Contacts = () => {
 
   return (
     <Provider>
-      <Text style={{ fontSize: 24, color: '#252525', marginLeft: 10, marginTop:3, fontWeight:"bold"}}>
-                        Contact Book
-                    </Text>
+      <Text
+        style={{
+          fontSize: 24,
+          color: "#252525",
+          marginLeft: 10,
+          marginTop: 3,
+          fontWeight: "bold",
+        }}
+      >
+        Contact Book
+      </Text>
       <View style={styles.container}>
         <View style={styles.buttonBar}>
           <View style={styles.searchContainer}>
@@ -216,7 +230,7 @@ const styles = StyleSheet.create({
   },
   contactBookContainer: {
     flex: 1,
-    marginTop:0
+    marginTop: 0,
   },
   contactList: {
     flex: 1,
