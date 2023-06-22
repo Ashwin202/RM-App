@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -17,37 +17,39 @@ const tabsData = [
   { id: 1, title: "My Contact Books" },
   { id: 2, title: "Campaign by Org" },
 ];
-
-const ContactBook = () => {
+const { height } = Dimensions.get('window')
+const GenerateContactList = ({ campaignList, navigation }) => {
+  console.log({campaignList})
   const [showDropdown, setShowDropdown] = useState(false);
-
   const handleEllipsisPress = () => {
     setShowDropdown(!showDropdown);
   };
   return (
     <Provider>
-      <View style={styles.contactBookContainer}>
-        <View style={styles.contactList}>
-          <TouchableOpacity style={styles.contactItem}>
-            <View style={styles.contactDetails}>
-              <Text style={styles.contactName}>Ulloor Residence</Text>
-              <View style={{ flexDirection: "row" }}>
-                <Text style={styles.contactNumber}>123 contacts</Text>
-                <Text style={styles.contactNumber}>96% dialled</Text>
-              </View>
-            </View>
-            <IconButton
-              onPress={() => handleEllipsisPress()}
-              icon={(props) => (
-                <Icon
-                  style={styles.verticalEllipsis}
-                  name="ellipsis-v"
-                  {...props}
-                />
-              )}
-            />
-          </TouchableOpacity>
-
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={styles.contactBookContainer}>
+          <View style={styles.contactList}>
+            {campaignList?.map((contactData) => (
+              <Provider key={contactData.id}>
+                <TouchableOpacity style={styles.contactItem} onPress={()=>navigation.navigate('ContactDetails')}>
+                  <View style={styles.contactDetails}>
+                    <Text style={styles.contactName}>{contactData.name}</Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <Text style={styles.contactNumber}>123 contacts</Text>
+                      <Text style={styles.contactNumber}>96% dialed</Text>
+                    </View>
+                  </View>
+                  <IconButton
+                    onPress={() => handleEllipsisPress()}
+                    icon={(props) => (
+                      <Icon
+                        style={styles.verticalEllipsis}
+                        name="ellipsis-v"
+                        {...props}
+                      />
+                    )}
+                  />
+                </TouchableOpacity>
                 {showDropdown && (
                   <View style={styles.dropdown}>
                     <TouchableOpacity style={styles.dropdownItem}>
@@ -66,9 +68,7 @@ const ContactBook = () => {
     </Provider>
   );
 };
-
-
-const Contacts = () => {
+const Contacts = ({navigation}) => {
   const [index, setIndex] = useState(0);
   const [contactList, setContactList] = useState("");
   const [activeTab, setActiveTab] = useState(tabsData[0]);
@@ -78,13 +78,12 @@ const Contacts = () => {
       try {
         const responseData = (await axios.get(`${BASE_URL}/api/campaign/list`))
           .data;
-        const campaignList = responseData.data;
+        const campaignList = responseData?.data || [];
         setList(campaignList);
       } catch (error) {
         alert("Error fetching campaign list:", error);
       }
     };
-
     fetchData();
   }, []);
   const handleTabPress = (tab) => {
@@ -93,12 +92,19 @@ const Contacts = () => {
   const handleTabChange = (tabIndex) => {
     setIndex(tabIndex);
   };
-
   return (
     <Provider>
-      <Text style={{ fontSize: 24, color: '#252525', marginLeft: 10, marginTop:3, fontWeight:"bold"}}>
-                        Contact Book
-                    </Text>
+      <Text
+        style={{
+          fontSize: 24,
+          color: "#252525",
+          marginLeft: 10,
+          marginTop: 3,
+          fontWeight: "bold",
+        }}
+      >
+        Contact Book
+      </Text>
       <View style={styles.container}>
         <View style={styles.buttonBar}>
           <View style={styles.searchContainer}>
@@ -106,7 +112,7 @@ const Contacts = () => {
             <TextInput
               placeholder="Search"
               style={styles.input}
-            // Other props you may need
+              // Other props you may need
             />
           </View>
           <Button
@@ -136,7 +142,7 @@ const Contacts = () => {
         </View>
         <View style={styles.tabContent}>
           {activeTab.id === 1 && (
-            <GenerateContactList campaignList={list} />
+            <GenerateContactList campaignList={list} navigation={navigation}/>
           )}
           {activeTab.id === 2 && <Text>Content for Tab 2</Text>}
           {activeTab.id === 3 && <Text>Content for Tab 3</Text>}
@@ -145,9 +151,7 @@ const Contacts = () => {
     </Provider>
   );
 };
-
 export default Contacts;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -182,7 +186,7 @@ const styles = StyleSheet.create({
   },
   contactBookContainer: {
     flex: 1,
-    marginTop:  0,
+    marginTop: 0,
   },
   contactList: {
     flex: 1,

@@ -1,4 +1,7 @@
 module.exports = {
+    getCampaignList(domain) {
+        return `SELECT * FROM ryng_${domain}.campaign WHERE active= 1;`;
+    },
     getCampaignCallsByID: (domain) => {
         return `
             SELECT c.*, COUNT(l.id) AS log_count
