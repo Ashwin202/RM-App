@@ -15,14 +15,10 @@ function generatePassword(password) {
 }
 function issueJWT(userDetails) {
     const expireTime = '1d'
-    // const payLoad = {
-    //     _id: userDetails._id,
-    //     sub: userDetails.userName, 
-    //     type: userDetails.userType,
-    //     iat: Date.now()
-    // }
     const payLoad = {
-        sub: userDetails._id,
+        _id: userDetails._id,
+        sub: userDetails.userName, 
+        type: userDetails.userType,
         iat: Date.now()
     }
     const signedToken = JWT.sign(payLoad, PRIV_KEY, { expiresIn: expireTime, algorithm: 'RS256'} )
