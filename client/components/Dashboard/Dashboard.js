@@ -1,10 +1,12 @@
-import * as React from "react";
-import { Text, View } from "react-native";
+import React, { useState } from "react";
+import { Text, View, Switch, StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import CustomDial from "../CustomDial/CustomDial";
 import LoginPage from "../LoginForm/LoginForm";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
+import CallWindow from "../callWindow/callWindow";
+import ContactList from "../campaign/contactList";
 
 function LogScreen() {
 	return (
@@ -22,10 +24,19 @@ function ContactScreen() {
 	);
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
 const Tab = createMaterialTopTabNavigator();
 
 export default function Dashboard() {
-	return (
+	
+return (
 		<Tab.Navigator
 			tabBarPosition="bottom"
 			independent={true}
@@ -83,7 +94,7 @@ export default function Dashboard() {
 					),
 					tabBarLabelStyle: { fontSize: 12, padding: 0, margin: 0 },
 				}}
-				component={LogScreen}
+				component={ContactList}
 			/>
 			<Tab.Screen
 				name="Keypad"
