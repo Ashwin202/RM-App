@@ -6,7 +6,6 @@ import Contacts from "../Contacts/Contacts";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
 import CallWindow from "../callWindow/callWindow";
-import ContactList from "../campaign/contactList";
 
 function LogScreen() {
   return (
@@ -93,7 +92,7 @@ export default function Dashboard() {
           ),
           tabBarLabelStyle: { fontSize: 12, padding: 0, margin: 0 },
         }}
-        component={ContactList}
+        component={LogScreen}
       />
       <Tab.Screen
         name="Keypad"

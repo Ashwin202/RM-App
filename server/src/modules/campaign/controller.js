@@ -21,4 +21,17 @@ module.exports = {
       sendHTTPResponse.success(response, "Failed to fetch campaign list");
     }
   },
+  getCampaignCalls: async (request, response) => {
+    const url = 'GET /api/campaign/:id/calls'
+    const domain = request.tenant
+    const campaignID = request.params.id
+    try {
+      const calls = await runQuery(domain, QueryBuilder.getCampaignCallsByID(domain), [campaignID])
+      const campaignInfo = await runQueryOne(domain, QueryBuilder.getCampaignInfo(domain), [campaignID])
+      return sendHTTPResponse.success(response, 'Calls Fetched Successfully.', { calls, campaignInfo })
+    } catch (error) {
+      Log.error(`[${domain} | ${url}| Error: ${error.message}`.red)
+      return sendHTTPResponse.error(response, error.message)
+    }
+  }
 };

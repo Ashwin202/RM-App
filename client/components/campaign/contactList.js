@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     StyleSheet,
     ScrollView,
     TextInput,
     TouchableOpacity,
-    Dimensions 
+    Dimensions
 } from 'react-native';
 import {
     Button,
@@ -14,11 +14,18 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios'
+import { BASE_URL } from '@env'
+import moment from 'moment'
 
-const CallWindow = () => {
+const CallWindow = ({ route }) => {
+    console.log({route})
+
     const [visible, setVisible] = useState(false);
     const [selectedDisposition, setSelectedDisposition] = useState('');
     const [index, setIndex] = useState(0);
+    const [calls, setCalls] = useState([])
+    const [campaignInfo, setCampaignInfo] = useState([])
 
     const handleDispose = () => {
         // Logic for dispose button
@@ -45,21 +52,17 @@ const CallWindow = () => {
         setIndex(tabIndex);
     };
 
-    const contacts = [
-        { name: 'John Doe', lastCallCount: 2, lastCallTime: '10:30 AM' },
-        { name: 'Jane Smith', lastCallCount: 0, lastCallTime: 'N/A' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
-        // Add more contacts as needed
-    ];
+
+
+    useEffect(() => {
+        const fetchCalls = async () => {
+            const { data } = await axios.get(`${BASE_URL}/api/campaign/1/calls`)
+            setCalls(data?.data.calls)
+            setCampaignInfo(data?.data.campaignInfo)
+        }
+        fetchCalls()
+    }, [])
+
     const { height } = Dimensions.get('window')
     return (
         <Provider>
@@ -68,14 +71,14 @@ const CallWindow = () => {
                 <View style={styles.topContainer}>
                     <Icon name="gift" size={28} color="#393E41" />
                     <Text style={{ fontSize: 24, color: '#393E41', marginLeft: 5 }}>
-                        Ulloor Residence Association
+                        {campaignInfo.name}
                     </Text>
                 </View>
 
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', padding: 10 }}>
                     <Text
                         style={{ flexBasis: '50%', marginVertical: 5, fontWeight: 'bold', color: '#252525' }}>
-                        Contacts: <Text style={{ fontWeight: 'normal', color: '#252525' }}>123</Text>
+                        Contacts: <Text style={{ fontWeight: 'normal', color: '#252525' }}>{campaignInfo.num_calls}</Text>
                     </Text>
                     <Text
                         style={{ flexBasis: '50%', marginVertical: 5, fontWeight: 'bold', color: '#252525' }}>
@@ -113,21 +116,21 @@ const CallWindow = () => {
                 <View style={styles.listContainer}>
                     <View style={styles.container}>
                         <ScrollView contentContainerStyle={{ flexGrow: 1, maxHeight: height }}>
-                            {contacts.map((contact, index) => (
+                            {calls.map((contact, index) => (
                                 <View key={index} style={styles.contactItem}>
                                     <View style={styles.leftContainer}>
-                                        <Text style={styles.contactName}>{contact.name}</Text>
+                                        <Text style={styles.contactName}>{contact.cust1 || contact.ph_num}</Text>
                                         <View
                                             style={{
                                                 flexDirection: 'row',
                                                 justifyContent: 'space-between',
                                             }}>
                                             <Text style={styles.lastCallCount}>
-                                                {contact.lastCallCount}{' '}
-                                                {contact.lastCallCount === 1 ? 'call' : 'calls'}
+                                                {contact?.log_count}{' '}
+                                                {contact?.log_count === 1 ? 'call' : 'calls'}
                                             </Text>
                                             <Text style={styles.lastCallTime}>
-                                                {contact.lastCallTime}
+                                                {moment(contact?.call_started).fromNow()}
                                             </Text>
                                         </View>
                                     </View>

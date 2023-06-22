@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect  } from "react";
 import {
   View,
   Text,
@@ -17,40 +17,36 @@ const tabsData = [
   { id: 1, title: "My Contact Books" },
   { id: 2, title: "Campaign by Org" },
 ];
-const { height } = Dimensions.get('window')
-const GenerateContactList = ({ campaignList }) => {
+
+const ContactBook = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleEllipsisPress = () => {
     setShowDropdown(!showDropdown);
   };
-
   return (
     <Provider>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.contactBookContainer}>
-          <View style={styles.contactList}>
-            {campaignList.map((contactData) => (
-              <Provider key={contactData.id}>
-                <TouchableOpacity style={styles.contactItem}>
-                  <View style={styles.contactDetails}>
-                    <Text style={styles.contactName}>{contactData.name}</Text>
-                    <View style={{ flexDirection: "row" }}>
-                      <Text style={styles.contactNumber}>123 contacts</Text>
-                      <Text style={styles.contactNumber}>96% dialed</Text>
-                    </View>
-                  </View>
-                  <IconButton
-                    onPress={() => handleEllipsisPress()}
-                    icon={(props) => (
-                      <Icon
-                        style={styles.verticalEllipsis}
-                        name="ellipsis-v"
-                        {...props}
-                      />
-                    )}
-                  />
-                </TouchableOpacity>
+      <View style={styles.contactBookContainer}>
+        <View style={styles.contactList}>
+          <TouchableOpacity style={styles.contactItem}>
+            <View style={styles.contactDetails}>
+              <Text style={styles.contactName}>Ulloor Residence</Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={styles.contactNumber}>123 contacts</Text>
+                <Text style={styles.contactNumber}>96% dialled</Text>
+              </View>
+            </View>
+            <IconButton
+              onPress={() => handleEllipsisPress()}
+              icon={(props) => (
+                <Icon
+                  style={styles.verticalEllipsis}
+                  name="ellipsis-v"
+                  {...props}
+                />
+              )}
+            />
+          </TouchableOpacity>
 
                 {showDropdown && (
                   <View style={styles.dropdown}>
@@ -100,17 +96,9 @@ const Contacts = () => {
 
   return (
     <Provider>
-      <Text
-        style={{
-          fontSize: 24,
-          color: "#252525",
-          marginLeft: 10,
-          marginTop: 3,
-          fontWeight: "bold",
-        }}
-      >
-        Contact Book
-      </Text>
+      <Text style={{ fontSize: 24, color: '#252525', marginLeft: 10, marginTop:3, fontWeight:"bold"}}>
+                        Contact Book
+                    </Text>
       <View style={styles.container}>
         <View style={styles.buttonBar}>
           <View style={styles.searchContainer}>
@@ -118,7 +106,7 @@ const Contacts = () => {
             <TextInput
               placeholder="Search"
               style={styles.input}
-              // Other props you may need
+            // Other props you may need
             />
           </View>
           <Button
@@ -194,7 +182,7 @@ const styles = StyleSheet.create({
   },
   contactBookContainer: {
     flex: 1,
-    marginTop: 0,
+    marginTop:  0,
   },
   contactList: {
     flex: 1,
