@@ -1,6 +1,6 @@
 module.exports = {
     login: async()=> {
-        const domain = request.tenant
+        //const domain = request.body.tenant
         const url = 'POST /api/auth/login'
 
         try {

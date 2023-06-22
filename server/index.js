@@ -7,14 +7,18 @@ const { readdirSync } = require('fs');
 const Log = require('./log')
 const ip = require('ip')
 const tenantMiddleware = require('./middleware/subDomainManager')
+const path = require('path');
+const passport = require('passport');
 
 require('dotenv').config()
+require('./config/passport')(passport);
 
 app.use(express.json())
 app.use(cors())
 app.use(helmet())
 
 app.use(tenantMiddleware)
+app.use(passport.initialize());
 
 const getDirectories = source => readdirSync(source, { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name)
 

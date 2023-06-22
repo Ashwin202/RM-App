@@ -15,7 +15,7 @@ export default function LoginForm({ navigation }) {
     const [password, setPassword] = useState("");
     const loginAgent = async () => {
         try {
-            const body = { username, password, userType: 'agent' }
+            const body = { username, password, userType: 'agent', tenant: 'idfc' }
             const config = { headers: { 'Content-Type': 'application/json' } }
             console.log({BASE_URL})
             const result = await axios.post(`${BASE_URL}/api/login`, body, config)
