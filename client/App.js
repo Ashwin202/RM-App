@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import LoginForm from "./components/LoginForm/LoginForm.js";
 import UserDetailsDropdown from "./components/TopBarDropDown/TopBarDropDown.js";
 import Icon from "react-native-vector-icons/FontAwesome";
+import ContactList from "./components/campaign/contactList";
 
 import {
   Image,
@@ -23,6 +24,7 @@ const App = () => {
     <NavigationContainer independent={true}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginForm} />
+        <Stack.Screen name="ContactDetails" component={ContactList} />
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
@@ -58,6 +60,9 @@ const App = () => {
             ),
           })}
         />
+
+      
+
       </Stack.Navigator>
     </NavigationContainer>
   );
