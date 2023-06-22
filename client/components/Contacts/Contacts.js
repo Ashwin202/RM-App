@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import {
   View,
   Text,
@@ -134,6 +134,9 @@ const Contacts = () => {
 
   return (
     <Provider>
+      <Text style={{ fontSize: 24, color: '#252525', marginLeft: 10, marginTop:3, fontWeight:"bold"}}>
+                        Contact Book
+                    </Text>
       <View style={styles.container}>
         <View style={styles.buttonBar}>
           <View style={styles.searchContainer}>
@@ -182,11 +185,11 @@ const Contacts = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 10,
   },
   tabBar: {
     flexDirection: "row",
-    borderBottomWidth: 1,
+    borderBottomWidth: 0,
   },
   tabItem: {
     flex: 1,
@@ -195,7 +198,7 @@ const styles = StyleSheet.create({
   },
   activeTabItem: {
     borderBottomWidth: 2,
-    borderBottomColor: "blue",
+    borderBottomColor: "#F22742",
   },
   tabTitle: {
     fontSize: 14,
@@ -213,10 +216,11 @@ const styles = StyleSheet.create({
   },
   contactBookContainer: {
     flex: 1,
+    marginTop:0
   },
   contactList: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 0,
   },
   contactItem: {
     flexDirection: "row",
