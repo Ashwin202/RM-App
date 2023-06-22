@@ -5,6 +5,7 @@ import {
     ScrollView,
     TextInput,
     TouchableOpacity,
+    Dimensions 
 } from 'react-native';
 import {
     Button,
@@ -59,7 +60,7 @@ const CallWindow = () => {
         { name: 'Mike Johnson', lastCallCount: 1, lastCallTime: 'Yesterday' },
         // Add more contacts as needed
     ];
-
+    const { height } = Dimensions.get('window')
     return (
         <Provider>
             <View style={styles.container}>
@@ -111,7 +112,7 @@ const CallWindow = () => {
                 {/* Content */}
                 <View style={styles.listContainer}>
                     <View style={styles.container}>
-                        <ScrollView contentContainerStyle={{ flexGrow: 1, maxHeight: 100}}>
+                        <ScrollView contentContainerStyle={{ flexGrow: 1, maxHeight: height }}>
                             {contacts.map((contact, index) => (
                                 <View key={index} style={styles.contactItem}>
                                     <View style={styles.leftContainer}>
