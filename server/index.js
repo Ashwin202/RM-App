@@ -9,6 +9,7 @@ const ip = require('ip')
 const tenantMiddleware = require('./middleware/subDomainManager')
 const path = require('path');
 const passport = require('passport');
+const requestLogger = require('./middleware/requestLogger')
 
 require('dotenv').config()
 require('./config/passport')(passport);
