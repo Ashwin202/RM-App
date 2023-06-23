@@ -1,6 +1,7 @@
 const Log = require('../../../log')
 const router = require("express").Router()
 const controller = require('./controller')
+const sendHTTPResponse = require('../../../lib/sendHTTPResponse')
 const requestLogger = require('../../../middleware/requestLogger')
 const validateCredentials = require('../../../middleware/validateCredentials')
 const verificationMiddleware = require('../../../config/verificationMiddleware')
@@ -14,7 +15,7 @@ module.exports = {
         router.post('/login', validateCredentials, verificationMiddleware, controller.login)
         router.get('/protected', authenticationMiddleware, (request, reponse) => {
             Log.info('Verified route | /protected')
-            reponse.status(200).json({ error: false, message: "You are successfully authenticated to this route!", data: {}});
+            sendHTTPResponse.success(response, 'You are successfully authenticated to this route!', {}, 200)
         });
         return router;
     },

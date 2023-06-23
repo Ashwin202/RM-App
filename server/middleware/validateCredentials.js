@@ -1,5 +1,6 @@
 const Log = require('../log')
 const specialCharValidator = require('./specialCharValidator')
+const sendHTTPResponse = require('../lib/sendHTTPResponse')
 module.exports = async (request, response, next) => {
     Log.debug('Inside specialCharValidator')
     const username = await specialCharValidator(request.body.username)
@@ -7,11 +8,7 @@ module.exports = async (request, response, next) => {
 
     if (!username || !password) {
         Log.debug('Failed to validate credentials')
-        response.status(400).json({
-            error: true,
-            message: 'Invalid Special Characters used in Username/Password',
-            data: {}
-        })
+        sendHTTPResponse.error(response, 'Invalid Special Characters used in Username/Password', {}, 400)
         return
     } else next()
 }
