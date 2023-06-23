@@ -3,6 +3,10 @@ import { SafeAreaView, View, StyleSheet, TouchableOpacity, Text, TextInput } fro
 import Icon from 'react-native-vector-icons/FontAwesome'
 import axios from 'react-native-axios'
 
+
+import { Linking } from 'react-native';
+const phoneNumber = '04954262266'; // Replace with the actual phone number
+
 const App = () => {
     const [dialedNumbers, setDialedNumbers] = useState('');
 
@@ -28,6 +32,7 @@ const App = () => {
             return;
         }
         else {
+            Linking.openURL(`tel:${phoneNumber}`);
             const body = {
                 number: dialedNumbers
             }
