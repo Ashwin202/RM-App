@@ -34,7 +34,7 @@ export default function LoginForm({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={require('../../assets/img/ryng8_red.png')} />
+            <Image style={styles.image} source={require('../../assets/img/logo.png')}/>
             <StatusBar style="auto" />
 
 
@@ -46,7 +46,9 @@ export default function LoginForm({ navigation }) {
                     value={username}
                     onChangeText={(email) => setUsername(email)}
                 />
+            </View>
 
+            <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}
                     placeholder="Password"
@@ -65,24 +67,27 @@ export default function LoginForm({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#F22F46",
         alignItems: "center",
         justifyContent: "center",
     },
     image: {
-        marginBottom: 40,
-        width: "44%",
-        height: 45,
+        marginBottom: 0,
+        position:'absolute',
+        top:-35,
+        left: -35,
+        width: 170,
+        height: 170,
     },
     inputView: {
-        borderRadius: 5,
         width: "80%",
+        height: 70,
     },
     TextInput: {
         width: '100%',
-        height: 50,
         flex: 1,
-        padding: 12,
+        padding: 10,
+        fontSize:18,
         backgroundColor: "#f5f5f5",
         marginBottom: 20,
         shadowColor: '#000',
@@ -90,7 +95,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 4,
         elevation: 3,
-        outlineStyle: 'none',
+        borderRadius: 8
     },
     loginBtn: {
         width: "80%",
@@ -98,10 +103,10 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#F22F46",
+        backgroundColor: "#E6E8E6",
     },
     loginText: {
-        color: "#fff",
-        fontSize: 20
+        color: "#252525",
+        fontSize: 15
     }
 });
