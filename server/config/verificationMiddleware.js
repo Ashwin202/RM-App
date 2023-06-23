@@ -1,10 +1,10 @@
 const validatePassword = require('../lib/passwordUtils').validatePassword
-const checkUser = require('./authDBFunctions').checkUser
+const checkUser = require('./authDBFunctions')
 const issueJWT = require('../lib/passwordUtils').issueJWT
 const sendHTTPResponse = require('../lib/sendHTTPResponse')
 const Log = require('../log')
 
-const domain  = process.env.tenant
+const domain  = process.env.domain
 
 module.exports = async (request, response, next) => {
     const userDetails = await checkUser(domain, request.body.username)

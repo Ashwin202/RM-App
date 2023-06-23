@@ -27,6 +27,6 @@ function issueJWT(userDetails) {
         expires: expireTime    
     }
 }
-module.exports = validatePassword
-module.exports = generatePassword
-module.exports = issueJWT
+module.exports.validatePassword = validatePassword
+module.exports.generatePassword = generatePassword
+module.exports.issueJWT = issueJWT
