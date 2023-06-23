@@ -24,7 +24,7 @@ const App = () => {
     <NavigationContainer independent={true}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginForm} />
-        <Stack.Screen name="ContactDetails" component={ContactList} />
+
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
@@ -61,7 +61,41 @@ const App = () => {
           })}
         />
 
-      
+        <Stack.Screen
+          name="ContactDetails"
+          component={ContactList}
+          options={({ navigation, route }) => ({
+            headerShown: true,
+            headerLeft: () => (
+              <IconButton
+                    onPress={() => navigation.goBack()}
+                    icon={(props) => <Icon name="chevron-left" {...props} />}
+                  />
+            ),
+            headerTitle: (props) => (
+              <Text variant="h6" style={{ marginLeft: 2 }}>
+                Contacts
+              </Text>
+            ),
+            headerRight: () => (
+              <>
+                <TouchableOpacity>
+                  <IconButton
+                    onPress={() => toggleDropdown()}
+                    icon={(props) => <Icon name="ellipsis-v" {...props} />}
+                  />
+                  {isDropdownVisible && (
+                    <UserDetailsDropdown
+                      navigation={navigation}
+                      isDropdownVisible={isDropdownVisible}
+                      setIsDropdownVisible={setIsDropdownVisible}
+                    />
+                  )}
+                </TouchableOpacity>
+              </>
+            ),
+          })}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>

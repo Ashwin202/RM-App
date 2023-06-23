@@ -13,8 +13,11 @@ module.exports = {
     },
     getCampaignInfo: (domain) => {
         return `
-            SELECT name, num_calls FROM ryng_${domain}.campaign
-            WHERE id = ?
+            SELECT c.name, c.num_calls, COALESCE(AG.username, AD.username) AS createdBy
+            FROM ryng_${domain}.campaign c
+            LEFT JOIN ryng_${domain}.agent AG ON c.created_by = AG.id AND c.creator_type = 1
+            LEFT JOIN ryng_${domain}.admin AD ON c.created_by = AD.id AND c.creator_type = 0
+            WHERE c.id = ?
         `
     }
 }
