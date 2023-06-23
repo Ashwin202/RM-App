@@ -20,6 +20,7 @@ import moment from 'moment'
 
 const CallWindow = ({ route }) => {
     console.log({route})
+    const campaigID = route.params?.campaigID
 
     const [visible, setVisible] = useState(false);
     const [selectedDisposition, setSelectedDisposition] = useState('');
@@ -56,7 +57,7 @@ const CallWindow = ({ route }) => {
 
     useEffect(() => {
         const fetchCalls = async () => {
-            const { data } = await axios.get(`${BASE_URL}/api/campaign/1/calls`)
+            const { data } = await axios.get(`${BASE_URL}/api/campaign/${campaigID}/calls`)
             setCalls(data?.data.calls)
             setCampaignInfo(data?.data.campaignInfo)
         }
@@ -82,7 +83,7 @@ const CallWindow = ({ route }) => {
                     </Text>
                     <Text
                         style={{ flexBasis: '50%', marginVertical: 5, fontWeight: 'bold', color: '#252525' }}>
-                        Owner: <Text style={{ fontWeight: 'normal', color: '#252525' }}>Arun Raj</Text>
+                        Owner: <Text style={{ fontWeight: 'normal', color: '#252525' }}>{campaignInfo.createdBy}</Text>
                     </Text>
                     <Text
                         style={{ flexBasis: '50%', marginVertical: 5, fontWeight: 'bold', color: '#252525' }}>
@@ -116,6 +117,7 @@ const CallWindow = ({ route }) => {
                 <View style={styles.listContainer}>
                     <View style={styles.container}>
                         <ScrollView contentContainerStyle={{ flexGrow: 1, maxHeight: height }}>
+                            {!calls.length && <p>No Data Available</p>}
                             {calls.map((contact, index) => (
                                 <View key={index} style={styles.contactItem}>
                                     <View style={styles.leftContainer}>
@@ -130,7 +132,7 @@ const CallWindow = ({ route }) => {
                                                 {contact?.log_count === 1 ? 'call' : 'calls'}
                                             </Text>
                                             <Text style={styles.lastCallTime}>
-                                                {moment(contact?.call_started).fromNow()}
+                                                {contact?.call_started ? moment(contact?.call_started).fromNow() : ''}
                                             </Text>
                                         </View>
                                     </View>

@@ -19,7 +19,6 @@ const tabsData = [
 ];
 const { height } = Dimensions.get('window')
 const GenerateContactList = ({ campaignList, navigation }) => {
-  console.log({campaignList})
   const [showDropdown, setShowDropdown] = useState(false);
   const handleEllipsisPress = () => {
     setShowDropdown(!showDropdown);
@@ -31,7 +30,7 @@ const GenerateContactList = ({ campaignList, navigation }) => {
           <View style={styles.contactList}>
             {campaignList?.map((contactData) => (
               <Provider key={contactData.id}>
-                <TouchableOpacity style={styles.contactItem} onPress={()=>navigation.navigate('ContactDetails')}>
+                <TouchableOpacity style={styles.contactItem} onPress={() => navigation.navigate('ContactDetails', { campaigID: contactData.id })}>
                   <View style={styles.contactDetails}>
                     <Text style={styles.contactName}>{contactData.name}</Text>
                     <View style={{ flexDirection: "row" }}>
@@ -68,7 +67,7 @@ const GenerateContactList = ({ campaignList, navigation }) => {
     </Provider>
   );
 };
-const Contacts = ({navigation}) => {
+const Contacts = ({ navigation }) => {
   const [index, setIndex] = useState(0);
   const [contactList, setContactList] = useState("");
   const [activeTab, setActiveTab] = useState(tabsData[0]);
@@ -112,7 +111,7 @@ const Contacts = ({navigation}) => {
             <TextInput
               placeholder="Search"
               style={styles.input}
-              // Other props you may need
+            // Other props you may need
             />
           </View>
           <Button
@@ -142,7 +141,7 @@ const Contacts = ({navigation}) => {
         </View>
         <View style={styles.tabContent}>
           {activeTab.id === 1 && (
-            <GenerateContactList campaignList={list} navigation={navigation}/>
+            <GenerateContactList campaignList={list} navigation={navigation} />
           )}
           {activeTab.id === 2 && <Text>Content for Tab 2</Text>}
           {activeTab.id === 3 && <Text>Content for Tab 3</Text>}
